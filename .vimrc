@@ -30,5 +30,8 @@ set smartindent
 set softtabstop=4
 set autoindent
 
+vmap <F6> :!xclip -f -sel clip<CR>
+map <F7> :-1r !xclip -o -sel clip<CR>
+
 colorscheme sublimemonokai
 
