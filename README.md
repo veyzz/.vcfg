@@ -3,6 +3,13 @@ Configs
 
 Installation
 ------------
+Requirements:
+
+  - tmux **`>= 2.4`**
+  - awk, perl, sed
+  - bash
+  - vim
+  - ranger if you want
 
 ```
 $ cd
