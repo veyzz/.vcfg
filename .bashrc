@@ -116,21 +116,13 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Some useful aliases
-alias telegram='nohup /opt/Telegram/Telegram & exit'
-alias steam='nohup steam & exit'
-alias chrome='nohup google-chrome-stable & exit'
-alias ts3='nohup ts3 & exit'
-alias discord='nohup discord & exit'
-alias vk='nohup vk & exit'
-alias spotify='nohup spotify & exit'
-alias proj='cd ~/Desktop/proj'
-
 bind '"\C-k":history-search-backward'
 bind '"\C-j":history-search-forward'
 
 export RANGER_LOAD_DEFAULT_RC='FALSE'
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 export TERM="xterm-256color"
+
+[ -z "$TMUX"  ] && { tmux attach > /dev/null 2>&1 || exec tmux new-session -s "tmux";}
+
