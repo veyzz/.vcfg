@@ -9,13 +9,13 @@ Requirements:
   - awk, perl, sed
   - bash
   - vim
-  - ranger if you want
+  - python3 **`>= 3.1`**, curses
+  - ranger
   - universal ctags if you want
 
 ```
 $ cd
 $ git clone https://github.com/veyzz/.vcfg.git
-$ ln -sf .vcfg/.bashrc && ln -sf .vcfg/.vimrc && \
-ln -sf .vcfg/.tmux.conf && ln -sf .vcfg/.tmux.conf.local
+$ .vcfg/install.sh
 ```
 
