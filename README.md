@@ -10,6 +10,7 @@ Requirements:
   - bash
   - vim
   - ranger if you want
+  - universal ctags if you want
 
 ```
 $ cd
