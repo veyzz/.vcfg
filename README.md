@@ -10,7 +10,6 @@ Requirements:
   - bash
   - vim
   - python3 **`>= 3.1`**, curses
-  - ranger
   - universal ctags if you want
 
 ```

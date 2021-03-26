@@ -119,9 +119,6 @@ fi
 bind '"\C-k":history-search-backward'
 bind '"\C-j":history-search-forward'
 
-export RANGER_LOAD_DEFAULT_RC='FALSE'
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
 export TERM="xterm-256color"
 
 [ -z "$TMUX"  ] && { tmux attach > /dev/null 2>&1 || exec tmux new-session -s "tmux";}
