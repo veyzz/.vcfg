@@ -17,21 +17,20 @@ call plug#end()
 
 set number
 set cmdheight=1
-set hlsearch
 
 set noerrorbells
 set novisualbell
 
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set smarttab
 set expandtab
 set smartindent
-set softtabstop=4
+set softtabstop=2
 set autoindent
 
 vmap <F6> :!xclip -f -sel clip<CR>
-map <F7> :-1r !xclip -o -sel clip<CR>
+map <F7> :r !xclip -o -sel clip<CR>
 
 colorscheme sublimemonokai
 
