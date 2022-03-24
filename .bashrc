@@ -116,8 +116,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-bind '"\C-k":history-search-backward'
-bind '"\C-j":history-search-forward'
 
 export TERM="xterm-256color"
 
