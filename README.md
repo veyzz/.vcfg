@@ -14,6 +14,7 @@ Requirements:
   - universal ctags if you want
   - xclip if you want
   - urlview if you want
+  - PathPicker if you want
 
 ```
 $ cd
