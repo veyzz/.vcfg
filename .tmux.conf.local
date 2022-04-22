@@ -337,7 +337,7 @@ set -g history-limit 10000
 set -g status-keys vi
 set -g mode-keys vi
 
-bind v copy-mode # enter copy mode
+bind Escape copy-mode # enter copy mode
 
 # replace C-b by C-a instead of using both prefixes
 set -gu prefix2
