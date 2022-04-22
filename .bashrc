@@ -116,6 +116,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# for xclip
+export DISPLAY=:0
 
 export TERM="xterm-256color"
 
