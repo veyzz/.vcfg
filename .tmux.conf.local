@@ -352,6 +352,10 @@ bind C-a send-prefix
 
 # -- tpm -----------------------------------------------------------------------
 
+if "test ! -d ~/.tmux/plugins/tpm" \
+   "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm \
+    && ~/.tmux/plugins/tpm/bin/install_plugins'"
+
 # while I don't use tpm myself, many people requested official support so here
 # is a seamless integration that automatically installs plugins in parallel
 
