@@ -334,7 +334,7 @@ set -g history-limit 10000
 
 # force Vi mode
 #   really you should export VISUAL or EDITOR environment variable, see manual
-set -g status-keys vi
+#set -g status-keys vi
 set -g mode-keys vi
 
 bind Escape copy-mode # enter copy mode
@@ -389,12 +389,16 @@ tmux_conf_uninstall_plugins_on_reload=true
 
 # to enable a plugin, use the 'set -g @plugin' syntax:
 # visit https://github.com/tmux-plugins for available plugins
+
+# need external programs
 set -g @plugin 'tmux-plugins/tmux-fpp'
 set -g @fpp-key 'F'
 set -g @plugin 'tmux-plugins/tmux-urlview'
 set -g @urlview-key 'U'
-#set -g @plugin 'tmux-plugins/tmux-copycat'
-#set -g @plugin 'tmux-plugins/tmux-cpu'
+###
+
+set -g @plugin 'tmux-plugins/tmux-copycat'
+set -g @plugin 'tmux-plugins/tmux-open'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @continuum-restore 'on'
