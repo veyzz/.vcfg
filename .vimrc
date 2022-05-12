@@ -14,7 +14,6 @@ endif
 call plug#begin('~/.vim/bundle') 
 Plug 'ErichDonGubler/vim-sublime-monokai'
 Plug 'vim-airline/vim-airline'
-Plug 'tpope/vim-fugitive'
 Plug 'jiangmiao/auto-pairs'
 call plug#end() 
 
@@ -50,4 +49,31 @@ imap <C-j> <CR>
 imap <C-m> <NL>
 
 colorscheme sublimemonokai
+
+function! MakeSession()
+  let b:sessiondir = $HOME . "/.vim/sessions" . expand('%:p:h')
+  if (filewritable(b:sessiondir) != 2)
+    exe 'silent !mkdir -p ' b:sessiondir
+    redraw!
+  endif
+  let b:filename = b:sessiondir . '/' . expand('%:t') . '.vim'
+  exe "mksession! " . b:filename
+endfunction
+
+function! LoadSession()
+  let b:sessiondir = $HOME . "/.vim/sessions" . expand('%:p:h')
+  let b:sessionfile = b:sessiondir . '/' . expand('%:t') . '.vim'
+  if (filereadable(b:sessionfile))
+    exe 'source ' b:sessionfile
+  else
+    echo "No session loaded."
+  endif
+endfunction
+
+" saving and restoring vim-sessions
+augroup sessions
+  au!
+  au VimEnter * nested :call LoadSession()
+  au VimLeave,BufLeave * :call MakeSession()
+augroup END
 
