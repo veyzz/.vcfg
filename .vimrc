@@ -4,6 +4,7 @@ set nocompatible
 syntax enable
 set ttimeoutlen=10
 
+" plugins
 if empty(glob('~/.vim/autoload/plug.vim')) 
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs 
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -23,6 +24,12 @@ augroup numbertoggle
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
   autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+augroup END
+
+" .h is c-file, not cpp
+augroup cfiletype
+    autocmd!
+    autocmd BufRead,BufNewFile *.h,*.c set filetype=c
 augroup END
 
 set cmdheight=1
