@@ -121,5 +121,12 @@ export DISPLAY=:0
 
 export TERM="xterm-256color"
 
-[ -z "$TMUX"  ] && { tmux attach > /dev/null 2>&1 || exec tmux new-session -s "tmux";}
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+if command -v tmux &> /dev/null && \
+   [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && \
+   [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ];
+then
+  tmux attach > /dev/null 2>&1 || exec tmux new-session -s "tmux"
+fi
 
