@@ -407,6 +407,12 @@ set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @resurrect-capture-pane-contents 'on'
 set -g @continuum-restore 'on'
 
+set -g @plugin 'laktak/extrakto'
+set -g @extrakto_key 'C-t'
+set -g @extrakto_insert_key 'enter'
+set -g @extrakto_copy_key 'ctrl-y'
+set -g @extrakto_edit_key 'ctrl-o'
+set -g @extrakto_open_key 'alt-o'
 
 # -- custom variables ----------------------------------------------------------
 
