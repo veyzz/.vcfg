@@ -51,23 +51,32 @@ imap <C-m> <NL>
 colorscheme sublimemonokai
 
 function! MakeSession()
-  let b:sessiondir = $HOME . "/.vim/sessions" . expand('%:p:h')
+  let b:sessiondir = $HOME . "/.vim/sessions/" . expand('%:p:h')
   if (filewritable(b:sessiondir) != 2)
     exe 'silent !mkdir -p ' b:sessiondir
     redraw!
   endif
   let b:filename = b:sessiondir . '/' . expand('%:t') . '.vim'
   exe "mksession! " . b:filename
+  call RemoveOldSessions()
 endfunction
 
 function! LoadSession()
-  let b:sessiondir = $HOME . "/.vim/sessions" . expand('%:p:h')
+  let b:sessiondir = $HOME . "/.vim/sessions/" . expand('%:p:h')
   let b:sessionfile = b:sessiondir . '/' . expand('%:t') . '.vim'
   if (filereadable(b:sessionfile))
     exe 'source ' b:sessionfile
   else
     echo "No session loaded."
   endif
+endfunction
+
+function! RemoveOldSessions()
+  let b:sessiondir = $HOME . "/.vim/sessions/"
+  let b:notuseddays = 16
+  silent exe '!find ' . b:sessiondir ' -type f -name "*.vim" -mtime "+' . b:notuseddays . '" -delete'
+  silent exe '!find ' . b:sessiondir ' -empty -type d -delete'
+  redraw!
 endfunction
 
 " saving and restoring vim-sessions
