@@ -85,4 +85,5 @@ augroup sessions
   au VimEnter * nested :call LoadSession()
   au VimLeave,BufLeave * :call MakeSession()
 augroup END
+au SwapExists * au! sessions
 
