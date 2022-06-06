@@ -85,5 +85,13 @@ augroup sessions
   au VimEnter * nested :call LoadSession()
   au VimLeave,BufLeave * :call MakeSession()
 augroup END
+
+" session only when there is not arg '+number' and swap does not exist
+let g:cmd_args=split(system( "ps -o command= -p " . getpid()))
+for item in g:cmd_args
+  if item =~ '^+\d\+$'
+    au! sessions
+  endif
+endfor
 au SwapExists * au! sessions
 
