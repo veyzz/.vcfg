@@ -15,6 +15,7 @@ call plug#begin('~/.vim/bundle')
 Plug 'ErichDonGubler/vim-sublime-monokai'
 Plug 'vim-airline/vim-airline'
 Plug 'jiangmiao/auto-pairs'
+Plug 'easymotion/vim-easymotion'
 call plug#end() 
 
 " toggle relative and absolute line numbers
@@ -47,6 +48,10 @@ set autoindent
 " swap C-j and C-m
 imap <C-j> <CR>
 imap <C-m> <NL>
+
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_smartcase = 1
+nmap f <Plug>(easymotion-overwin-f2)
 
 colorscheme sublimemonokai
 
