@@ -411,7 +411,7 @@ set -g @resurrect-capture-pane-contents 'on'
 set -g @continuum-restore 'on'
 
 set -g @plugin 'laktak/extrakto'
-set -g @extrakto_key 'C-t'
+set -g @extrakto_key 't'
 set -g @extrakto_split_direction 'v'
 set -g @extrakto_insert_key 'enter'
 set -g @extrakto_copy_key 'ctrl-y'

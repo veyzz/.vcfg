@@ -51,7 +51,11 @@ imap <C-m> <NL>
 
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
-nmap f <Plug>(easymotion-overwin-f2)
+nmap s <Plug>(easymotion-overwin-f2)
+map  f <Plug>(easymotion-bd-f)
+nmap f <Plug>(easymotion-overwin-f)
+map  F <Plug>(easymotion-bd-f)
+nmap F <Plug>(easymotion-overwin-f)
 
 colorscheme sublimemonokai
 
@@ -62,6 +66,7 @@ function! MakeSession()
     redraw!
   endif
   let b:filename = b:sessiondir . '/' . expand('%:t') . '.vim'
+  set sessionoptions=buffers,curdir,folds,winsize,localoptions
   exe "mksession! " . b:filename
   call RemoveOldSessions()
 endfunction
