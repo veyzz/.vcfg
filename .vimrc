@@ -97,9 +97,10 @@ augroup sessions
 augroup END
 
 " session only when there is not arg '+number' and swap does not exist
+" and not diff mode
 let g:cmd_args=split(system( "ps -o command= -p " . getpid()))
 for item in g:cmd_args
-  if item =~ '^+\d\+$'
+  if item =~ '^+\d\+$' || item == '-d'
     au! sessions
   endif
 endfor
