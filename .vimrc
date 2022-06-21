@@ -49,13 +49,24 @@ set autoindent
 imap <C-j> <CR>
 imap <C-m> <NL>
 
+map <Space> <Leader>
+
+" easymotion plugin
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
+let g:EasyMotion_verbose = 0
 nmap s <Plug>(easymotion-overwin-f2)
 map  f <Plug>(easymotion-bd-f)
 nmap f <Plug>(easymotion-overwin-f)
 map  F <Plug>(easymotion-bd-f)
 nmap F <Plug>(easymotion-overwin-f)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+map <Leader>l <Plug>(easymotion-lineforward)
+
+" toggle keeping cursor in the middle all the time
+nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
 
 colorscheme sublimemonokai
 
