@@ -75,7 +75,7 @@ function! MakeSession()
     redraw!
   endif
   let b:filename = b:sessiondir . '/' . expand('%:t') . '.vim'
-  set sessionoptions=buffers,curdir,folds,winsize,localoptions
+  set sessionoptions=buffers,folds,winsize,localoptions
   exe "mksession! " . b:filename
   call RemoveOldSessions()
 endfunction
@@ -109,7 +109,7 @@ augroup END
 " and not diff mode
 let g:cmd_args=split(system( "ps -o command= -p " . getpid()))
 for item in g:cmd_args
-  if item =~ '^+\d\+$' || item == '-d'
+  if item =~ '^+\d\+$' || item == '-d' || item == 'vimdiff'
     au! sessions
   endif
 endfor
