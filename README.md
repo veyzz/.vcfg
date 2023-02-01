@@ -5,7 +5,7 @@ Installation
 ------------
 Requirements:
 
-  - tmux **`>= 2.4`**
+  - tmux **`>= 3.1`**
   - awk, perl, sed
   - bash
   - vim
@@ -22,3 +22,7 @@ $ git clone https://github.com/veyzz/.vcfg.git
 $ .vcfg/install.sh
 ```
 
+Disclaimer
+------------
+DO NOT USE unless you're veyzz.
+Make sure you backed up your config files.

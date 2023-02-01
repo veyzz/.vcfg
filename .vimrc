@@ -16,6 +16,7 @@ Plug 'ErichDonGubler/vim-sublime-monokai'
 Plug 'vim-airline/vim-airline'
 Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-abolish'
 call plug#end() 
 
 " toggle relative and absolute line numbers

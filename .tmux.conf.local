@@ -418,6 +418,13 @@ set -g @extrakto_copy_key 'ctrl-y'
 set -g @extrakto_edit_key 'ctrl-o'
 set -g @extrakto_open_key 'alt-o'
 
+set -g @plugin 'IngoMeyer441/tmux-easy-motion'
+set -g @easy-motion-default-key-bindings 'off'
+set -g @easy-motion-binding-bd-f 'f'
+set -g @easy-motion-binding-j 'j'
+set -g @easy-motion-binding-k 'k'
+set -g @easy-motion-verbose "off"
+
 # -- custom variables ----------------------------------------------------------
 
 # to define a custom #{foo} variable, define a POSIX shell function between the
