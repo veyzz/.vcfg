@@ -6,6 +6,7 @@ mkdir -p ~/.config/extrakto
 
 # configs
 ln -sft ~ ~/.vcfg/.bashrc
+ln -sft ~ ~/.vcfg/.inputrc
 ln -sft ~ ~/.vcfg/.vimrc
 ln -sft ~ ~/.vcfg/.tmux.conf
 ln -sft ~ ~/.vcfg/.tmux.conf.local

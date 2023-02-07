@@ -1,0 +1,11 @@
+set editing-mode vi
+set show-mode-in-prompt on
+set vi-ins-mode-string \1\e[34;1m\2[i]\1\e[0m\2
+set vi-cmd-mode-string \1\e[33;1m\2[c]\1\e[0m\2
+
+# switch to cmd mode before executing a command
+set keymap vi-insert
+RETURN: "\e\n"
+
+set colored-stats on
+
