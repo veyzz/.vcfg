@@ -8,7 +8,7 @@ Requirements:
   - tmux **`>= 3.1`**
   - awk, perl, sed
   - bash **`>= 4.4`**
-  - vim
+  - vim **`>= 8.1`** with +clipboard
   - curl
   - python3 **`>= 3.6`**, curses
   - universal ctags if you want
