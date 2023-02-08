@@ -7,7 +7,7 @@ Requirements:
 
   - tmux **`>= 3.1`**
   - awk, perl, sed
-  - bash
+  - bash **`>= 4.4`**
   - vim
   - curl
   - python3 **`>= 3.6`**, curses
