@@ -19,5 +19,7 @@ git config --global alias.lg "log --graph --date-order --abbrev-commit --date=re
 
 # install fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install --key-bindings --completion --no-update-rc
+~/.fzf/install --bin
+ln -sft ~/.fzf/shell ~/.vcfg/.fzf/shell/key-bindings.custom.bash
+ln -sft ~ ~/.vcfg/.fzf.bash
 
