@@ -13,7 +13,6 @@ Requirements:
   - python3 **`>= 3.6`**, curses
   - universal ctags if you want
   - xclip if you want
-  - urlview if you want
   - PathPicker if you want
 
 ```

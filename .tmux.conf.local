@@ -399,8 +399,6 @@ set -g focus-events on
 # file/url manager (extern)
 set -g @plugin 'tmux-plugins/tmux-fpp'
 set -g @fpp-key 'F'
-set -g @plugin 'tmux-plugins/tmux-urlview'
-set -g @urlview-key 'U'
 
 # file/url manager
 set -g @plugin 'tmux-plugins/tmux-open'

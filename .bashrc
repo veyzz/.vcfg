@@ -116,6 +116,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# wrap the following commands for interactive use to avoid accidental file overwrites.
+rm() { command rm -i "${@}"; }
+cp() { command cp -i "${@}"; }
+mv() { command mv -i "${@}"; }
+
 # for xclip
 export DISPLAY=:0
 
@@ -123,6 +128,7 @@ export TERM="xterm-256color"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+# start tmux session
 if command -v tmux &> /dev/null && \
    [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && \
    [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ];
@@ -130,3 +136,4 @@ then
   tmux attach > /dev/null 2>&1 || exec tmux new-session -s "tmux"
 fi
 
+unset SSH_ASKPASS

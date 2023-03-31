@@ -37,8 +37,12 @@ augroup END
 
 set cmdheight=1
 
+" no sounds
 set noerrorbells
 set novisualbell
+
+" turn off hlsearch
+set nohlsearch
 
 set tabstop=2
 set shiftwidth=2
