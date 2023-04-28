@@ -136,4 +136,18 @@ then
   tmux attach > /dev/null 2>&1 || exec tmux new-session -s "tmux"
 fi
 
-unset SSH_ASKPASS
+function fzg {
+  if [[ $# -ne 1 ]]
+  then
+    echo "Only 1 param expected"
+    return 1
+  fi
+  fstring=$(grep -RnE $1 | fzf)
+  file=$(echo $fstring | cut -d ':' -f 1)
+  linenumber=$(echo $fstring | cut -d ':' -f 2)
+  if [[ -z "$file" ]]
+  then
+    return 0
+  fi
+  vim +$linenumber $file
+}
