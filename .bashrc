@@ -121,11 +121,6 @@ rm() { command rm -i "${@}"; }
 cp() { command cp -i "${@}"; }
 mv() { command mv -i "${@}"; }
 
-# for xclip
-export DISPLAY=:0
-
-export TERM="xterm-256color"
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # start tmux session
