@@ -18,6 +18,7 @@ git config --global alias.lg "log --graph --date-order --abbrev-commit --date=re
   --pretty=format:'%C(auto)%h -%d%C(reset) %s %C(cyan)(%cr) %C(bold black)<%an>%C(reset)'"
 git config --global alias.dt "difftool --tool=vimdiff"
 git config --global alias.mt "mergetool --tool=vimdiff"
+git config --global mergetool.keepBackup false
 
 # install fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf

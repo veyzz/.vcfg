@@ -396,6 +396,9 @@ set -g focus-events on
 # to enable a plugin, use the 'set -g @plugin' syntax:
 # visit https://github.com/tmux-plugins for available plugins
 
+# system buff
+set -g @plugin 'tmux-plugins/tmux-yank'
+
 # file/url manager (extern)
 set -g @plugin 'tmux-plugins/tmux-fpp'
 set -g @fpp-key 'F'

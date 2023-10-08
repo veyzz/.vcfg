@@ -116,7 +116,7 @@ augroup END
 " and not diff mode
 let g:cmd_args=split(system( "ps -o command= -p " . getpid()))
 for item in g:cmd_args
-  if item =~ '^+\d\+$' || item == '-d' || item == 'vimdiff'
+  if item =~ '^+\d\+$' || item == '-d' || item == 'vimdiff' || item =~ 'diffthis'
     au! sessions
   endif
 endfor
