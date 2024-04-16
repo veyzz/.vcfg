@@ -349,10 +349,6 @@ bind C-a send-prefix
 # move status line to top
 #set -g status-position top
 
-# vim-like shell cmd
-bind-key -T copy-mode    ! command-prompt -p "cmd:" "send-keys -X copy-selection-no-clear \; run-shell \"tmux show-buffer | %1\" "
-bind-key -T copy-mode-vi ! command-prompt -p "cmd:" "send-keys -X copy-selection-no-clear \; run-shell \"tmux show-buffer | %1\" "
-
 # -- tpm -----------------------------------------------------------------------
 
 if "test ! -d ~/.tmux/plugins/tpm" \
@@ -399,14 +395,14 @@ set -g focus-events on
 # system buff
 set -g @plugin 'tmux-plugins/tmux-yank'
 
-# file/url manager (extern)
-set -g @plugin 'tmux-plugins/tmux-fpp'
-set -g @fpp-key 'F'
-
 # file/url manager
-set -g @plugin 'tmux-plugins/tmux-open'
-set -g @plugin 'tmux-plugins/tmux-copycat'
-set -g @open-S 'https://www.google.com/search?q='
+set -g @plugin 'Morantron/tmux-fingers'
+set -g @fingers-key 'C-f'
+set -g @fingers-jump-key 'F'
+set -g @fingers-main-action ':copy:'
+set -g @fingers-ctrl-action ':paste:'
+set -g @fingers-shift-action ':open:'
+set -g @fingers-alt-action ':open:'
 
 # save/restore tmux session
 set -g @plugin 'tmux-plugins/tmux-resurrect'
@@ -423,6 +419,7 @@ set -g @extrakto_edit_key 'ctrl-o'
 set -g @extrakto_open_key 'alt-o'
 
 set -g @plugin 'IngoMeyer441/tmux-easy-motion'
+set -g @easy-motion-prefix "Space"
 set -g @easy-motion-default-key-bindings 'off'
 set -g @easy-motion-binding-bd-f 'f'
 set -g @easy-motion-binding-j 'j'
