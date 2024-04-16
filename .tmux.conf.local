@@ -227,7 +227,7 @@ tmux_conf_theme_right_separator_sub="|"
 #     - #{username}
 #     - #{username_ssh}
 tmux_conf_theme_status_left=" ❐ #S | Tabs "
-tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} "
+tmux_conf_theme_status_right=" #{tmux_mode_indicator} #{mouse}#{pairing}#{?battery_bar, #{battery_bar},}#{?battery_status,#{battery_status},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} "
 
 # status left style
 tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_6,$tmux_conf_theme_colour_7,$tmux_conf_theme_colour_8"
@@ -410,6 +410,7 @@ set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @resurrect-capture-pane-contents 'on'
 set -g @continuum-restore 'on'
 
+# fzf screen search
 set -g @plugin 'laktak/extrakto'
 set -g @extrakto_key 't'
 set -g @extrakto_split_direction 'v'
@@ -418,6 +419,7 @@ set -g @extrakto_copy_key 'ctrl-y'
 set -g @extrakto_edit_key 'ctrl-o'
 set -g @extrakto_open_key 'alt-o'
 
+# vim like tmux easy-motion
 set -g @plugin 'IngoMeyer441/tmux-easy-motion'
 set -g @easy-motion-prefix "Space"
 set -g @easy-motion-default-key-bindings 'off'
@@ -425,6 +427,22 @@ set -g @easy-motion-binding-bd-f 'f'
 set -g @easy-motion-binding-j 'j'
 set -g @easy-motion-binding-k 'k'
 set -g @easy-motion-verbose "off"
+
+# ssh & status enhancement
+set -g @plugin 'MunifTanjim/tmux-suspend'
+set -g @plugin 'MunifTanjim/tmux-mode-indicator'
+set -g @mode_indicator_empty_prompt ' '
+set -g @mode_indicator_empty_mode_style 'bg=#080808,fg=#8a8a8a'
+set -g @mode_indicator_prefix_prompt '⌨' # U+2328
+set -g @mode_indicator_prefix_mode_style 'bg=#080808,fg=#8a8a8a'
+set -g @mode_indicator_copy_prompt '🗎' # U+1F5CE
+set -g @mode_indicator_copy_mode_style 'bg=#080808,fg=#8a8a8a'
+set -g @mode_indicator_sync_prompt '⚏' # U+268F
+set -g @mode_indicator_sync_mode_style 'bg=#080808,fg=#8a8a8a'
+set -g @suspend_suspended_options " \
+@mode_indicator_custom_prompt:: STOPPED (F12) , \
+@mode_indicator_custom_mode_style::bg=brightblack\\,fg=black, \
+"
 
 # -- custom variables ----------------------------------------------------------
 
