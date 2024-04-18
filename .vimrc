@@ -81,7 +81,7 @@ colorscheme sublimemonokai
 autocmd Bufread *.md  setlocal textwidth=0
 let g:markdown_folding=1
 let g:vim_markdown_conceal=1
-autocmd Bufread *.md  setlocal conceallevel=2
+"autocmd Bufread *.md  setlocal conceallevel=2
 command! Glow vert term glow %
 
 function! MakeSession()
