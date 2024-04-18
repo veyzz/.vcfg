@@ -13,6 +13,7 @@ Requirements:
   - python3 **`>= 3.6`**, curses
   - universal ctags if you want
   - xclip if you want
+  - glow if you want
 
 ```
 $ cd

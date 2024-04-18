@@ -19,6 +19,8 @@ Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-abolish'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'roxma/vim-tmux-clipboard'
+Plug 'godlygeek/tabular'
+Plug 'preservim/vim-markdown'
 call plug#end() 
 
 " toggle relative and absolute line numbers
@@ -74,6 +76,13 @@ map <Leader>l <Plug>(easymotion-lineforward)
 nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
 
 colorscheme sublimemonokai
+
+" markdown integration
+autocmd Bufread *.md  setlocal textwidth=0
+let g:markdown_folding=1
+let g:vim_markdown_conceal=1
+autocmd Bufread *.md  setlocal conceallevel=2
+command! Glow vert term glow %
 
 function! MakeSession()
   let b:sessiondir = $HOME . "/.vim/sessions/" . expand('%:p:h')
