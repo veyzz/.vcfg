@@ -349,6 +349,9 @@ bind C-a send-prefix
 # move status line to top
 #set -g status-position top
 
+# set F9 toggle sync panes
+bind-key f9 set-window-option synchronize-panes\; display-message "synchronize-panes is now #{?pane_synchronized,on,off}"
+
 # -- tpm -----------------------------------------------------------------------
 
 if "test ! -d ~/.tmux/plugins/tpm" \
