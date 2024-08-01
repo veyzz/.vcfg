@@ -77,6 +77,23 @@ nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
 
 colorscheme sublimemonokai
 
+" cscope integration
+if has("cscope")
+    " path to cscope bin
+    set csprg=cscope " /usr/bin/cscope
+    set csto=0
+    set cst
+    set nocsverb
+    " add from curr dir
+    if filereadable("cscope.out")
+        cs add cscope.out
+    " check env var for cscope file
+    elseif $CSCOPE_DB != ""
+        cs add $CSCOPE_DB
+    endif
+    set csverb
+endif
+
 " markdown integration
 autocmd Bufread *.md  setlocal textwidth=0
 let g:markdown_folding=1
