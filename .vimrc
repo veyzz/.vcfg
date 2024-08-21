@@ -21,6 +21,8 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'godlygeek/tabular'
 Plug 'preservim/vim-markdown'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 call plug#end() 
 
 " toggle relative and absolute line numbers
@@ -54,6 +56,8 @@ set smartindent
 set softtabstop=2
 set autoindent
 
+set colorcolumn=80
+
 " swap C-j and C-m
 imap <C-j> <CR>
 imap <C-m> <NL>
@@ -71,6 +75,12 @@ map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 map <Leader>h <Plug>(easymotion-linebackward)
 map <Leader>l <Plug>(easymotion-lineforward)
+
+" fzf plugin
+let $FZF_DEFAULT_OPTS="--bind ctrl-y:preview-up,ctrl-e:preview-down,
+\ctrl-b:preview-page-up,ctrl-f:preview-page-down,
+\ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,
+\shift-up:preview-top,shift-down:preview-bottom"
 
 " toggle keeping cursor in the middle all the time
 nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
