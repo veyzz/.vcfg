@@ -81,6 +81,10 @@ let $FZF_DEFAULT_OPTS="--bind ctrl-y:preview-up,ctrl-e:preview-down,
 \ctrl-b:preview-page-up,ctrl-f:preview-page-down,
 \ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,
 \shift-up:preview-top,shift-down:preview-bottom"
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 '--ignore=tags --ignore=cscope.out',
+  \                 fzf#vim#with_preview(), <bang>0)
 
 " toggle keeping cursor in the middle all the time
 nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
