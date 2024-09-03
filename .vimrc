@@ -86,28 +86,13 @@ command! -bang -nargs=* Ag
   \                 '--ignore=tags --ignore=cscope.out',
   \                 fzf#vim#with_preview(), <bang>0)
 nnoremap <silent> <Leader>] :Ag <C-R><C-W><CR>
+nnoremap <silent> g] :Tags <C-R><C-W><CR>
+nnoremap <silent> <Leader>g] :BTags<CR>
 
 " toggle keeping cursor in the middle all the time
 nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
 
 colorscheme sublimemonokai
-
-" cscope integration
-if has("cscope")
-    " path to cscope bin
-    set csprg=cscope " /usr/bin/cscope
-    set csto=0
-    set cst
-    set nocsverb
-    " add from curr dir
-    if filereadable("cscope.out")
-        cs add cscope.out
-    " check env var for cscope file
-    elseif $CSCOPE_DB != ""
-        cs add $CSCOPE_DB
-    endif
-    set csverb
-endif
 
 " markdown integration
 autocmd Bufread *.md  setlocal textwidth=0
