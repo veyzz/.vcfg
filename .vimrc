@@ -85,6 +85,7 @@ command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>,
   \                 '--ignore=tags --ignore=cscope.out',
   \                 fzf#vim#with_preview(), <bang>0)
+nnoremap <silent> <Leader>] :Ag <C-R><C-W><CR>
 
 " toggle keeping cursor in the middle all the time
 nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
