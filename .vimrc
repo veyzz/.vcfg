@@ -23,6 +23,7 @@ Plug 'godlygeek/tabular'
 Plug 'preservim/vim-markdown'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-fugitive'
 call plug#end() 
 
 " toggle relative and absolute line numbers
@@ -56,7 +57,7 @@ set smartindent
 set softtabstop=2
 set autoindent
 
-set colorcolumn=80
+set colorcolumn=79
 
 " swap C-j and C-m
 imap <C-j> <CR>
@@ -86,7 +87,7 @@ command! -bang -nargs=* Ag
   \                 '--ignore=tags --ignore=cscope.out',
   \                 fzf#vim#with_preview(), <bang>0)
 nnoremap <silent> <Leader>] :Ag <C-R><C-W><CR>
-nnoremap <silent> g] :Tags <C-R><C-W><CR>
+"nnoremap <silent> g] :Tags <C-R><C-W><CR>
 nnoremap <silent> <Leader>g] :BTags<CR>
 
 " toggle keeping cursor in the middle all the time

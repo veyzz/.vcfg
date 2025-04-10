@@ -131,19 +131,3 @@ then
   tmux attach > /dev/null 2>&1 || exec tmux new-session -s "tmux"
 fi
 
-function fzg {
-  if [[ "$#" -eq 0 ]]; then
-    echo "Search string expected"
-    return 1
-  fi
-  fstring=$(grep -RnEI --exclude-dir=.git --exclude-dir=venv \
-                       --exclude-dir=__pycache__ --exclude=tags \
-                       --exclude=cscope.out "$*" | fzf)
-  file=$(echo $fstring | cut -d ':' -f 1)
-  linenumber=$(echo $fstring | cut -d ':' -f 2)
-  if [[ -z "$file" ]]
-  then
-    return 0
-  fi
-  vim +$linenumber $file
-}
