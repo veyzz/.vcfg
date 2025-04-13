@@ -186,6 +186,12 @@ vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
 vim.keymap.set('i', '<C-j>', '<CR>')
 vim.keymap.set('i', '<C-m>', '<NL>')
 
+-- Tmux-like windows management
+vim.api.nvim_set_keymap('n', '<C-W>_', ':vsplit<CR>',
+                        {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<C-W>-', ':split<CR>',
+                        {noremap = true, silent = true})
+
 -- Easymotion
 vim.g.EasyMotion_do_mapping = 0
 vim.g.EasyMotion_smartcase = 1
