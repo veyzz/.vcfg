@@ -45,7 +45,8 @@ require('lazy').setup({
   {'roxma/vim-tmux-clipboard'},
   {'christoomey/vim-tmux-navigator'},
   {'tpope/vim-fugitive'},
-  {'junegunn/fzf.vim', dependencies = {'junegunn/fzf'}}
+  {'junegunn/fzf.vim', dependencies = {'junegunn/fzf'}},
+  {'preservim/nerdtree'},
 })
 
 -- Main theme
@@ -182,6 +183,31 @@ vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
   end
 })
 
+-- NERDTree
+vim.api.nvim_create_autocmd({'StdinReadPre', 'VimEnter'}, {
+  pattern = '*',
+  callback = function(args)
+    if args.event == 'StdinReadPre' then
+      vim.g.std_in = 1
+      return
+    end
+
+    if vim.fn.argc() == 0 and not vim.g.std_in then
+      vim.cmd.NERDTree()
+    end
+  end
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'nerdtree',
+  callback = function()
+    vim.keymap.del('n', '<C-j>', {buffer = true})
+    vim.keymap.del('n', '<C-k>', {buffer = true})
+  end
+})
+
+vim.keymap.set('n', '<Leader>n', '<cmd>NERDTreeFocus<CR>',
+               {noremap = true, silent = true, desc = 'Focus NERDTree'})
 
 -- Tmux-like windows management
 local function enter_resize_mode()
