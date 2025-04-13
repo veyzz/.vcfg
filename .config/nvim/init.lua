@@ -182,9 +182,6 @@ vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
   end
 })
 
--- Swap C-j and C-m
-vim.keymap.set('i', '<C-j>', '<CR>')
-vim.keymap.set('i', '<C-m>', '<NL>')
 
 -- Tmux-like windows management
 local function enter_resize_mode()
@@ -210,10 +207,12 @@ local function enter_resize_mode()
     end
 
     for key, mapping in pairs(original_mappings) do
-      vim.keymap.set('n', key, mapping.rhs, {noremap = mapping.noremap == 1,
-                                             silent = mapping.silent == 1,
-                                             expr = mapping.expr == 1,
-                                             nowait = mapping.nowait == 1})
+      vim.keymap.set('n', key, mapping.rhs,
+                     {noremap = mapping.noremap == 1,
+                      silent = mapping.silent == 1,
+                      expr = mapping.expr == 1,
+                      nowait = mapping.nowait == 1,
+                      desc = mapping.desc})
     end
   end
 
@@ -234,27 +233,44 @@ local function enter_resize_mode()
 
   for _, key in ipairs(keys) do
     temp_mappings[key] = true
-    vim.keymap.set('n', key, function() resize(key) end, {noremap = true,
-                                                          silent = true,
-                                                          buffer = true})
+    vim.keymap.set('n', key, function() resize(key) end,
+                   {noremap = true, silent = true, buffer = true})
   end
 end
 
-vim.keymap.set('n', '<C-W>', enter_resize_mode, {noremap = true, silent = true})
-vim.keymap.set('n', '<C-W>_', ':vsplit<CR>', {noremap = true, silent = true})
-vim.keymap.set('n', '<C-W>-', ':split<CR>', {noremap = true, silent = true})
+vim.keymap.set('n', '<C-W>', enter_resize_mode,
+               {noremap = true, silent = true,
+                desc = 'Enter resize window mode'})
+vim.keymap.set('n', '<C-W>_', '<cmd>vsplit<CR>',
+               {noremap = true, silent = true,
+                desc = 'Vertical split window'})
+vim.keymap.set('n', '<C-W>-', '<cmd>split<CR>',
+               {noremap = true, silent = true,
+                desc = 'Split window'})
 
 -- Easymotion
 vim.g.EasyMotion_do_mapping = 0
 vim.g.EasyMotion_smartcase = 1
 vim.g.EasyMotion_verbose = 0
 
-vim.keymap.set('n', '<Leader>f', '<Plug>(easymotion-overwin-f)')
-vim.keymap.set('n', '<Leader>s', '<Plug>(easymotion-overwin-f2)')
-vim.keymap.set('n', '<Leader>j', '<Plug>(easymotion-j)')
-vim.keymap.set('n', '<Leader>k', '<Plug>(easymotion-k)')
-vim.keymap.set('n', '<Leader>h', '<Plug>(easymotion-linebackward)')
-vim.keymap.set('n', '<Leader>l', '<Plug>(easymotion-lineforward)')
+vim.keymap.set('n', '<Leader>f', '<Plug>(easymotion-overwin-f)',
+               {noremap = false, silent = true,
+                desc = 'EasyMotion: jump to 1 char across windows'})
+vim.keymap.set('n', '<Leader>s', '<Plug>(easymotion-overwin-f2)',
+               {noremap = false, silent = true,
+                desc = 'EasyMotion: jump to 2 chars across windows'})
+vim.keymap.set('n', '<Leader>j', '<Plug>(easymotion-j)',
+               {noremap = true, silent = true,
+                desc = 'EasyMotion: jump to line below'})
+vim.keymap.set('n', '<Leader>k', '<Plug>(easymotion-k)',
+               {noremap = true, silent = true,
+                desc = 'EasyMotion: jump to line above'})
+vim.keymap.set('n', '<Leader>h', '<Plug>(easymotion-linebackward)',
+               {noremap = true, silent = true,
+                desc = 'EasyMotion: edge of word linebackward'})
+vim.keymap.set('n', '<Leader>l', '<Plug>(easymotion-lineforward)',
+               {noremap = true, silent = true,
+                desc = 'EasyMotion: edge of word lineforward '})
 
 -- Fuzzy search and preview
 vim.env.FZF_DEFAULT_OPTS = '--bind ' .. table.concat({
@@ -287,16 +303,19 @@ local function ag_cword()
   vim.cmd('Ag ' .. cword)
 end
 
-vim.api.nvim_create_user_command('Ag', Ag, {bang = true,
-                                            nargs = '*',
-                                            desc = 'Fuzzy search with AG'})
+vim.api.nvim_create_user_command('Ag', Ag,
+                                 {bang = true,
+                                  nargs = '*',
+                                  desc = 'Fuzzy search with AG'})
 
-vim.keymap.set('n', '<Leader>]', ag_cword, {silent = true,
-                                            noremap = true,
-                                            desc = 'Search current word'})
-vim.keymap.set('n', '<Leader>g]', ':BTags<CR>', {silent = true,
-                                                 noremap = true,
-                                                 desc = 'Search buffer tags'})
+vim.keymap.set('n', '<Leader>]', ag_cword,
+               {silent = true,
+                noremap = true,
+                desc = 'Search current word'})
+vim.keymap.set('n', '<Leader>g]', '<cmd>BTags<CR>',
+               {silent = true,
+                noremap = true,
+                desc = 'Search buffer tags'})
 
 -- Toggle keeping cursor in the middle all the time
 local center_mode = false
@@ -323,7 +342,8 @@ local function toggle_center_mode()
 end
 
 vim.keymap.set('n', '<Leader>zz', toggle_center_mode,
-               {silent = true, desc = 'toggle centering mode'})
+               {noremap = false, silent = true,
+                desc = 'Toggle centering mode'})
 
 -- Markdown
 vim.g.markdown_folding = 1
