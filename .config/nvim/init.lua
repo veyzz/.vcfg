@@ -187,32 +187,83 @@ vim.keymap.set('i', '<C-j>', '<CR>')
 vim.keymap.set('i', '<C-m>', '<NL>')
 
 -- Tmux-like windows management
-vim.api.nvim_set_keymap('n', '<C-W>_', ':vsplit<CR>',
-                        {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<C-W>-', ':split<CR>',
-                        {noremap = true, silent = true})
+local function enter_resize_mode()
+  local repeat_time = 600
+  local resize_step = 2
+  local keys = {'H', 'J', 'K', 'L'}
+
+  local temp_mappings = {}
+  local original_mappings = {}
+  for _, key in ipairs(keys) do
+    local mapping = vim.fn.maparg(key, 'n', false, true)
+    if not vim.tbl_isempty(mapping) then
+      original_mappings[key] = mapping
+    end
+  end
+
+  local timer = nil
+  local function cleanup()
+    if timer then timer:stop() end
+
+    for key, _ in pairs(temp_mappings) do
+      vim.keymap.del('n', key, {buffer = true})
+    end
+
+    for key, mapping in pairs(original_mappings) do
+      vim.keymap.set('n', key, mapping.rhs, {noremap = mapping.noremap == 1,
+                                             silent = mapping.silent == 1,
+                                             expr = mapping.expr == 1,
+                                             nowait = mapping.nowait == 1})
+    end
+  end
+
+  local function resize(direction)
+    if direction == 'H' then
+      vim.cmd(string.format('vertical resize -%d', resize_step))
+    elseif direction == 'L' then
+      vim.cmd(string.format('vertical resize +%d', resize_step))
+    elseif direction == 'J' then
+      vim.cmd(string.format('resize +%d', resize_step))
+    elseif direction == 'K' then
+      vim.cmd(string.format('resize -%d', resize_step))
+    end
+
+    if timer then timer:stop() end
+    timer = vim.defer_fn(cleanup, repeat_time)
+  end
+
+  for _, key in ipairs(keys) do
+    temp_mappings[key] = true
+    vim.keymap.set('n', key, function() resize(key) end, {noremap = true,
+                                                          silent = true,
+                                                          buffer = true})
+  end
+end
+
+vim.keymap.set('n', '<C-W>', enter_resize_mode, {noremap = true, silent = true})
+vim.keymap.set('n', '<C-W>_', ':vsplit<CR>', {noremap = true, silent = true})
+vim.keymap.set('n', '<C-W>-', ':split<CR>', {noremap = true, silent = true})
 
 -- Easymotion
 vim.g.EasyMotion_do_mapping = 0
 vim.g.EasyMotion_smartcase = 1
 vim.g.EasyMotion_verbose = 0
 
-local map = vim.keymap.set
-map('n', '<Leader>f', '<Plug>(easymotion-overwin-f)')
-map('n', '<Leader>s', '<Plug>(easymotion-overwin-f2)')
-map('n', '<Leader>j', '<Plug>(easymotion-j)')
-map('n', '<Leader>k', '<Plug>(easymotion-k)')
-map('n', '<Leader>h', '<Plug>(easymotion-linebackward)')
-map('n', '<Leader>l', '<Plug>(easymotion-lineforward)')
+vim.keymap.set('n', '<Leader>f', '<Plug>(easymotion-overwin-f)')
+vim.keymap.set('n', '<Leader>s', '<Plug>(easymotion-overwin-f2)')
+vim.keymap.set('n', '<Leader>j', '<Plug>(easymotion-j)')
+vim.keymap.set('n', '<Leader>k', '<Plug>(easymotion-k)')
+vim.keymap.set('n', '<Leader>h', '<Plug>(easymotion-linebackward)')
+vim.keymap.set('n', '<Leader>l', '<Plug>(easymotion-lineforward)')
 
 -- Telescope (замена FZF)
 local telescope = require('telescope.builtin')
-map('n', '<Leader>]', function()
+vim.keymap.set('n', '<Leader>]', function()
   require('telescope.builtin').grep_string({
     additional_args = '--ignore=tags --ignore=cscope.out'
   })
 end)
-map('n', '<Leader>g]', telescope.current_buffer_tags)
+vim.keymap.set('n', '<Leader>g]', telescope.current_buffer_tags)
 
 -- Toggle keeping cursor in the middle all the time
 local center_mode = false
