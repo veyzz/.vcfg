@@ -153,6 +153,9 @@ require('lualine').setup {
   extensions = {}
 }
 
+-- vim-tmux-navigator
+vim.g.tmux_navigator_disable_when_zoomed = 1
+
 -- Toggle relative and absolute line numbers
 local numbertoggle = vim.api.nvim_create_augroup('numbertoggle',
                                                  {clear = true})
