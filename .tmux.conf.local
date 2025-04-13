@@ -444,8 +444,11 @@ set -g @mode_indicator_sync_prompt '⚏' # U+268F
 set -g @mode_indicator_sync_mode_style 'bg=#080808,fg=#8a8a8a'
 set -g @suspend_suspended_options " \
 @mode_indicator_custom_prompt:: STOPPED (F12) , \
-@mode_indicator_custom_mode_style::bg=brightblack\\,fg=black, \
-"
+@mode_indicator_custom_mode_style::bg=brightblack\\,fg=black, "
+
+# vim integration
+set -g @plugin 'christoomey/vim-tmux-navigator'
+set -g @vim_navigator_prefix_mapping_clear_screen ""
 
 # -- custom variables ----------------------------------------------------------
 
