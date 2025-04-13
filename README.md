@@ -6,11 +6,12 @@ Installation
 Requirements:
 
   - tmux **`>= 3.1`**
-  - neovim **`>= 0.9`**
+  - neovim **`>= 0.10`**
   - bash **`>= 4.4`**
-  - awk, perl, sed
   - vim **`>= 8.1`** with +clipboard
-  - curl
+  - fzf **`>= 0.56.0`**
+  - bat, ag (the_silver_searcher), ripgrep
+  - curl, awk, perl, sed
   - python3 **`>= 3.6`**, curses
   - universal ctags if you want
   - xclip if you want
