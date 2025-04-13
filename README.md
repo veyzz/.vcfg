@@ -6,8 +6,9 @@ Installation
 Requirements:
 
   - tmux **`>= 3.1`**
-  - awk, perl, sed
+  - neovim **`>= 0.9`**
   - bash **`>= 4.4`**
+  - awk, perl, sed
   - vim **`>= 8.1`** with +clipboard
   - curl
   - python3 **`>= 3.6`**, curses
