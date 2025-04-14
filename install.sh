@@ -27,6 +27,6 @@ ln -sft ~/.config/extrakto ~/.vcfg/.config/extrakto/extrakto.conf
 git config --global alias.lg "log --graph --date-order --abbrev-commit \
 --date=relative --pretty=format:\
 '%C(auto)%h -%d%C(reset) %s %C(cyan)(%cr) %C(bold black)<%an>%C(reset)'"
-git config --global alias.dt "difftool --tool=vimdiff"
-git config --global alias.mt "mergetool --tool=vimdiff"
+git config --global alias.dt "difftool --tool=nvimdiff"
+git config --global alias.mt "mergetool --tool=nvimdiff"
 git config --global mergetool.keepBackup false
