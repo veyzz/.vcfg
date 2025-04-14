@@ -41,7 +41,6 @@ require('lazy').setup({
   {'jiangmiao/auto-pairs'},
   {'easymotion/vim-easymotion'},
   {'tpope/vim-abolish'},
-  {'tmux-plugins/vim-tmux-focus-events'},
   {'roxma/vim-tmux-clipboard'},
   {'christoomey/vim-tmux-navigator'},
   {'tpope/vim-fugitive'},
