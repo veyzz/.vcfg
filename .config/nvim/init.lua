@@ -47,6 +47,7 @@ require('lazy').setup({
   {'tpope/vim-fugitive'},
   {'junegunn/fzf.vim', dependencies = {'junegunn/fzf'}},
   {'preservim/nerdtree'},
+  {'neovim/nvim-lspconfig'},
 })
 
 -- Main theme
@@ -152,6 +153,18 @@ require('lualine').setup {
   inactive_winbar = {},
   extensions = {}
 }
+
+-- LSP
+require('lspconfig').clangd.setup({
+  on_attach = function(client, bufnr)
+    vim.bo[bufnr].tagfunc = nil
+  end
+})
+vim.diagnostic.enable(false)
+
+vim.keymap.set('n', '<Leader>d', function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end, {desc = 'Toggle diagnostic'})
 
 -- vim-tmux-navigator
 vim.g.tmux_navigator_disable_when_zoomed = 1
