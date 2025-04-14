@@ -18,8 +18,9 @@ ln -sft ~ ~/.vcfg/.tmux.conf
 ln -sft ~ ~/.vcfg/.tmux.conf.local
 ln -sft ~/.local/share/bash-completion/completions \
   ~/.vcfg/bash-completion/completions/tmux
-ln -sft ~/.fzf/shell ~/.vcfg/.fzf/shell/key-bindings.custom.bash
 ln -sft ~ ~/.vcfg/.fzf.bash
+ln -sft ~/.fzf/shell ~/.vcfg/.fzf/shell/completion.bash
+ln -sft ~/.fzf/shell ~/.vcfg/.fzf/shell/key-bindings.custom.bash
 ln -sft ~/.vim/ftplugin ~/.vcfg/.vim/ftplugin/python.vim
 ln -sft ~/.config/extrakto ~/.vcfg/.config/extrakto/extrakto.conf
 
