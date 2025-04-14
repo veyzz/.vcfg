@@ -154,6 +154,7 @@ require('lualine').setup {
 }
 
 -- LSP
+require('lspconfig').pylsp.setup({})
 require('lspconfig').clangd.setup({
   on_attach = function(client, bufnr)
     vim.bo[bufnr].tagfunc = nil
