@@ -162,6 +162,9 @@ require('lspconfig').clangd.setup({
 })
 vim.diagnostic.enable(false)
 
+vim.api.nvim_create_user_command('Symbols', vim.lsp.buf.document_symbol,
+                                 {desc = 'Show all symbols in file'})
+
 vim.keymap.set('n', '<Leader>d', function()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 end, {desc = 'Toggle diagnostic'})
