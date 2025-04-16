@@ -154,20 +154,26 @@ require('lualine').setup {
 }
 
 -- LSP
-require('lspconfig').pylsp.setup({})
+require('lspconfig').pylsp.setup({
+  autostart = false,
+})
 require('lspconfig').clangd.setup({
+  autostart = false,
   on_attach = function(client, bufnr)
     vim.bo[bufnr].tagfunc = nil
   end
 })
-vim.diagnostic.enable(false)
 
 vim.api.nvim_create_user_command('Symbols', vim.lsp.buf.document_symbol,
                                  {desc = 'Show all symbols in file'})
 
 vim.keymap.set('n', '<Leader>d', function()
-  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-end, {desc = 'Toggle diagnostic'})
+  if not vim.lsp.buf_is_attached() then
+    vim.cmd.LspStart()
+  else
+    vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+  end
+end, {desc = 'Start LSP on first running and toggle diagnostic'})
 
 -- vim-tmux-navigator
 vim.g.tmux_navigator_disable_when_zoomed = 1
