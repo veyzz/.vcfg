@@ -47,6 +47,9 @@ require('lazy').setup({
   {'junegunn/fzf.vim', dependencies = {'junegunn/fzf'}},
   {'preservim/nerdtree'},
   {'neovim/nvim-lspconfig'},
+  {'akinsho/git-conflict.nvim', version = "*", config = true},
+  {'lewis6991/gitsigns.nvim'},
+  {'kdheepak/lazygit.nvim'},
 })
 
 -- Main theme
@@ -154,6 +157,7 @@ require('lualine').setup {
 }
 
 -- LSP
+vim.diagnostic.config({ virtual_text = true })
 require('lspconfig').pylsp.setup({
   autostart = false,
 })

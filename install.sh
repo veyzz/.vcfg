@@ -6,6 +6,7 @@ cd
 mkdir -p ~/.config/nvim
 mkdir -p ~/.vim/ftplugin
 mkdir -p ~/.config/extrakto
+mkdir -p ~/.config/lazygit
 mkdir -p ~/.local/share/bash-completion/completions
 mkdir -p ~/.fzf/shell
 
@@ -23,11 +24,14 @@ ln -sft ~/.fzf/shell ~/.vcfg/.fzf/shell/completion.bash
 ln -sft ~/.fzf/shell ~/.vcfg/.fzf/shell/key-bindings.custom.bash
 ln -sft ~/.vim/ftplugin ~/.vcfg/.vim/ftplugin/python.vim
 ln -sft ~/.config/extrakto ~/.vcfg/.config/extrakto/extrakto.conf
+ln -sft ~/.config/lazygit ~/.vcfg/.config/lazygit/config.yml
 
 # git config modifications
 git config --global alias.lg "log --graph --date-order --abbrev-commit \
 --date=relative --pretty=format:\
 '%C(auto)%h -%d%C(reset) %s %C(cyan)(%cr) %C(bold black)<%an>%C(reset)'"
 git config --global alias.dt "difftool --tool=nvimdiff"
-git config --global alias.mt "mergetool --tool=nvimdiff"
+git config --global alias.mt "mergetool"
+git config --global merge.tool nvimdiff
+git config --global merge.conflictstyle diff3
 git config --global mergetool.keepBackup false

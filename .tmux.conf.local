@@ -410,6 +410,7 @@ set -g @fingers-alt-action ':open:'
 # save/restore tmux session
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @resurrect-processes 'lazygit'
 set -g @resurrect-capture-pane-contents 'on'
 set -g @continuum-restore 'on'
 

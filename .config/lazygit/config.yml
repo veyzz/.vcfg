@@ -1,0 +1,11 @@
+gui:
+  mouseEvents: false
+  scrollHeight: 14
+
+git:
+  useConfig: true
+
+refresher:
+  fetchInterval: 300
+
+notARepository: 'quit'
