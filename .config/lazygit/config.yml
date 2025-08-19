@@ -4,6 +4,7 @@ gui:
 
 git:
   useConfig: true
+  overrideGpg: true
 
 refresher:
   fetchInterval: 300
