@@ -173,7 +173,9 @@ vim.api.nvim_create_user_command('Symbols', vim.lsp.buf.document_symbol,
 
 vim.keymap.set('n', '<Leader>d', function()
   if not vim.lsp.buf_is_attached() then
-    vim.cmd.LspStart()
+    --vim.cmd.LspStart()
+    vim.lsp.enable('clangd')
+    vim.lsp.enable('pylsp')
   else
     vim.diagnostic.enable(not vim.diagnostic.is_enabled())
   end
