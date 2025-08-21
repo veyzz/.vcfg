@@ -1,6 +1,7 @@
 gui:
   mouseEvents: false
   scrollHeight: 14
+  filterMode: 'fuzzy'
 
 git:
   useConfig: true
