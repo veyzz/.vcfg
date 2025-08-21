@@ -10,11 +10,12 @@ Requirements:
   - bash **`>= 4.4`**
   - vim **`>= 8.1`** with +clipboard
   - fzf **`>= 0.56.0`**
-  - bat, ag (the_silver_searcher), ripgrep
+  - bat, ag (the_silver_searcher), ripgrep, fd
   - curl, awk, perl, sed
   - python3 **`>= 3.6`**, curses
   - universal ctags if you want
   - xclip if you want
+  - tree if you want
   - glow if you want
 
 ```

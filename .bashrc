@@ -1,133 +1,121 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+#
+# This file is sourced by all *interactive* bash shells on startup,
+# including some apparently interactive shells such as scp and rcp
+# that can't tolerate any output.  So make sure this doesn't display
+# anything or bad things will happen !
 
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
+# Test for an interactive shell.  There is no need to set anything
+# past this point for scp and rcp, and it's important to refrain from
+# outputting anything in those cases.
+if [[ $- != *i* ]] ; then
+  # Shell is non-interactive.  Be done now!
+  return
+fi
 
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
+# History settings (optimized for fzf)
+HISTCONTROL=ignoreboth:erasedups
+HISTSIZE=100000
+HISTFILESIZE=200000
+shopt -s histappend cmdhist lithist
 
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
-
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
+# Update window size after each command
 shopt -s checkwinsize
 
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
+# Enable extended globbing and other useful shell options
+shopt -s extglob globstar
 
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
-
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+# Color support detection
+if command -v tput >/dev/null 2>&1 && tput setaf 1 >/dev/null 2>&1; then
+  color_prompt=yes
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+  color_prompt=
 fi
-unset color_prompt force_color_prompt
 
-# If this is an xterm set the title to user@host:dir
+# Prompt configuration
+if [[ "$color_prompt" == "yes" ]]; then
+  PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+  PS1='\u@\h:\w\$ '
+fi
+unset color_prompt
+
+# Set xterm title
 case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
+xterm*|rxvt*|screen*|tmux*)
+  PS1="\[\e]0;\u@\h: \w\a\]$PS1"
+  ;;
 esac
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+# Color support for common utilities
+if command -v dircolors >/dev/null 2>&1; then
+  if [[ -r ~/.dircolors ]]; then
+    eval "$(dircolors -b ~/.dircolors)"
+  else
+    eval "$(dircolors -b)"
+  fi
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+  # Color aliases
+  alias ls='ls --color=auto --group-directories-first'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
+  alias diff='diff --color=auto'
+  alias ip='ip --color=auto'
 fi
 
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# some more ls aliases
-alias ll='ls -alF'
+# Useful aliases
+alias ll='ls -alhF'
 alias la='ls -A'
 alias l='ls -CF'
+alias df='df -h'
+alias du='du -h'
+alias mkdir='mkdir -pv'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
 
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+# Load custom aliases if exist
+if [[ -f ~/.bash_aliases ]]; then
+  source ~/.bash_aliases
 fi
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
+# Enable programmable completion
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
+  if [[ -f /usr/share/bash-completion/bash_completion ]]; then
+    source /usr/share/bash-completion/bash_completion
+  elif [[ -f /etc/bash_completion ]]; then
+    source /etc/bash_completion
   fi
 fi
 
-# wrap the following commands for interactive use to avoid accidental file overwrites.
+# Safety aliases
 rm() { command rm -i "${@}"; }
 cp() { command cp -i "${@}"; }
 mv() { command mv -i "${@}"; }
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# start tmux session
-if command -v tmux &> /dev/null && \
-   [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && \
-   [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ];
-then
-  tmux attach > /dev/null 2>&1 || exec tmux new-session -s "tmux"
+# Enhanced fzf configuration for history search
+if command -v fzf >/dev/null 2>&1; then
+  [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 fi
 
+# Function to make a directory and cd into it
+mkcd() {
+  mkdir -p "$1" && cd "$1"
+}
+
+# Load local customizations if they exist
+if [[ -f ~/.bashrc.local ]]; then
+  source ~/.bashrc.local
+fi
+
+# Start tmux session if available and not already in tmux
+# Modified to work better with fzf and existing setup
+if command -v tmux &> /dev/null && \
+    [[ -z "$TMUX" ]] && \
+    [[ "$TERM" != linux ]] && \
+    [[ "$TERM" != dumb ]] && \
+    [[ -n "$PS1" ]]; then
+  # Try to attach to existing session, create new one if none exists
+  tmux attach > /dev/null 2>&1 || exec tmux new-session -s "tmux"
+fi
