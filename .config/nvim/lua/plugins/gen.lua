@@ -1,4 +1,8 @@
 require('gen').setup({
+  model = "mistral",
+  --model = "codestral", -- RAM usage
+  show_prompt = "full",
+  show_model = true,
   display_mode = "horizontal-split",
   no_auto_close = true,
 })

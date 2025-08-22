@@ -24,7 +24,3 @@ vim.opt.clipboard:append({'unnamed', 'unnamedplus'})
 -- Theme
 vim.opt.termguicolors = true
 vim.opt.background = 'dark'
-
--- Markdown
-vim.g.markdown_folding = 1
-vim.g.vim_markdown_conceal = 1
