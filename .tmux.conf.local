@@ -35,7 +35,7 @@ tmux_conf_new_pane_reconnect_ssh=false
 # prompt for session name when creating a new session, possible values are:
 #   - true
 #   - false (default)
-tmux_conf_new_session_prompt=false
+tmux_conf_new_session_prompt=true
 
 
 # -- display -------------------------------------------------------------------
@@ -351,6 +351,9 @@ bind C-a send-prefix
 
 # set F9 toggle sync panes
 bind-key f9 set-window-option synchronize-panes\; display-message "synchronize-panes is now #{?pane_synchronized,on,off}"
+
+# sort by name
+bind s choose-tree -Zs -O name
 
 # -- tpm -----------------------------------------------------------------------
 

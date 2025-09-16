@@ -117,5 +117,5 @@ if command -v tmux &> /dev/null && \
     [[ "$TERM" != dumb ]] && \
     [[ -n "$PS1" ]]; then
   # Try to attach to existing session, create new one if none exists
-  tmux attach > /dev/null 2>&1 || exec tmux new-session -s "tmux"
+  tmux attach > /dev/null 2>&1 || exec tmux new-session -s "[0] main"
 fi
