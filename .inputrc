@@ -13,7 +13,6 @@ set colored-stats on
 set visible-stats on
 
 set completion-ignore-case on
-set show-all-if-ambiguous on
 
 set mark-directories on
 
