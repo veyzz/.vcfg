@@ -1,4 +1,5 @@
 gui:
+  language: 'en'
   mouseEvents: false
   scrollHeight: 14
   filterMode: 'fuzzy'
