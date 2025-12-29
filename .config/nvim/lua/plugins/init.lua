@@ -26,6 +26,13 @@ require('lazy').setup({
   {'akinsho/git-conflict.nvim', version = "*", config = true},
   {'lewis6991/gitsigns.nvim'},
   {'kdheepak/lazygit.nvim'},
+  { 'hrsh7th/nvim-cmp', dependencies = { 'hrsh7th/cmp-nvim-lsp',
+                                         'hrsh7th/cmp-buffer',
+                                         'hrsh7th/cmp-path',
+                                         'L3MON4D3/LuaSnip',
+                                         'saadparwaiz1/cmp_luasnip',
+                                       },
+  },
   {'David-Kunz/gen.nvim'},
   {'nvim-telescope/telescope.nvim', tag = '0.1.8',
    dependencies = {'nvim-lua/plenary.nvim'}},
@@ -40,3 +47,4 @@ require('plugins.fzf')
 require('plugins.nerdtree')
 require('plugins.nvim-lspconfig')
 require('plugins.gen')
+require('plugins.nvim-cmp')
