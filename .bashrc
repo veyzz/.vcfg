@@ -80,6 +80,11 @@ if [[ -f ~/.bash_aliases ]]; then
   source ~/.bash_aliases
 fi
 
+# Load custom env variables if exist
+if [[ -f ~/.bash_env_vars ]]; then
+  source ~/.bash_env_vars
+fi
+
 # Enable programmable completion
 if ! shopt -oq posix; then
   if [[ -f /usr/share/bash-completion/bash_completion ]]; then
