@@ -1,86 +1,73 @@
 local map = vim.keymap.set
 
+-- Auto-resize windows when tmux zoom in/out
+vim.api.nvim_create_autocmd("VimResized", {
+  group = vim.api.nvim_create_augroup("AutoResize", { clear = true }),
+  callback = function()
+    vim.cmd("tabdo wincmd =")
+  end,
+  desc = "Auto-resize splits on terminal resize"
+})
+
 -- Toggle keeping cursor in the middle all the time
-local center_mode = false
-local original_scrolloff = vim.o.scrolloff
-local augroup = vim.api.nvim_create_augroup('CenterMode', {})
+local center_mode_active = false
+local original_scrolloff = 0
+local center_augroup = vim.api.nvim_create_augroup('CenterMode',
+                                                   { clear = true })
 
 local function toggle_center_mode()
-    center_mode = not center_mode
-    if center_mode then
-        vim.o.scrolloff = math.floor(vim.fn.winheight(0) / 2)
-        vim.cmd('normal! zz')
-        vim.api.nvim_create_autocmd('VimResized', {
-            group = augroup,
-            callback = function()
-                vim.o.scrolloff = math.floor(vim.fn.winheight(0) / 2)
-            end
-        })
-        print('Centering cursor: on')
-    else
-        vim.o.scrolloff = original_scrolloff
-        vim.api.nvim_clear_autocmds({group = augroup})
-        print('Centering cursor: off')
-    end
+  center_mode_active = not center_mode_active
+
+  if center_mode_active then
+    original_scrolloff = vim.o.scrolloff
+    pcall(function()
+      vim.o.scrolloff = math.floor(vim.api.nvim_win_get_height(0) / 2)
+    end)
+    vim.cmd('normal! zz')
+
+    vim.api.nvim_create_autocmd('VimResized', {
+      group = center_augroup,
+      callback = function()
+        pcall(function()
+          vim.o.scrolloff = math.floor(vim.api.nvim_win_get_height(0) / 2)
+        end)
+      end
+    })
+    print('Center Mode: ON')
+  else
+    vim.o.scrolloff = original_scrolloff
+    vim.api.nvim_clear_autocmds({ group = center_augroup })
+    print('Center Mode: OFF')
+  end
 end
 
 map('n', '<Leader>zz', toggle_center_mode, {desc = 'Toggle centering mode'})
 
 -- Tmux-like windows management
 local function enter_resize_mode()
-  local repeat_time = 600
-  local resize_step = 2
-  local keys = {'H', 'J', 'K', 'L'}
+  local step = 2
+  print("Resize Mode: [h/j/k/l]. Esc to exit.")
 
-  local temp_mappings = {}
-  local original_mappings = {}
-  for _, key in ipairs(keys) do
-    local mapping = vim.fn.maparg(key, 'n', false, true)
-    if not vim.tbl_isempty(mapping) then
-      original_mappings[key] = mapping
-    end
+  while true do
+    vim.cmd('redraw')
+    local ok, char_code = pcall(vim.fn.getchar)
+    if not ok then break end
+
+    local char = vim.fn.nr2char(char_code)
+
+    if char == 'h' or char == 'H' then vim.cmd('vertical resize -' .. step)
+    elseif char == 'l' or char == 'L' then vim.cmd('vertical resize +' .. step)
+    elseif char == 'j' or char == 'J' then vim.cmd('resize +' .. step)
+    elseif char == 'k' or char == 'K' then vim.cmd('resize -' .. step)
+    elseif char == '\27' or char == 'q' or char == '\r' then break
+    else break end
   end
 
-  local timer = nil
-  local function cleanup()
-    if timer then timer:stop() end
-
-    for key, _ in pairs(temp_mappings) do
-      vim.keymap.del('n', key, {buffer = true})
-    end
-
-    for key, mapping in pairs(original_mappings) do
-      vim.keymap.set('n', key, mapping.rhs,
-                     {noremap = mapping.noremap == 1,
-                      silent = mapping.silent == 1,
-                      expr = mapping.expr == 1,
-                      nowait = mapping.nowait == 1,
-                      desc = mapping.desc})
-    end
-  end
-
-  local function resize(direction)
-    if direction == 'H' then
-      vim.cmd(string.format('vertical resize -%d', resize_step))
-    elseif direction == 'L' then
-      vim.cmd(string.format('vertical resize +%d', resize_step))
-    elseif direction == 'J' then
-      vim.cmd(string.format('resize +%d', resize_step))
-    elseif direction == 'K' then
-      vim.cmd(string.format('resize -%d', resize_step))
-    end
-
-    if timer then timer:stop() end
-    timer = vim.defer_fn(cleanup, repeat_time)
-  end
-
-  for _, key in ipairs(keys) do
-    temp_mappings[key] = true
-    vim.keymap.set('n', key, function() resize(key) end,
-                   {noremap = true, silent = true, buffer = true})
-  end
+  print("Resize Mode: Ended")
 end
 
-map('n', '<C-W>', enter_resize_mode, {desc = 'Enter resize window mode'})
-map('n', '<C-W>_', '<cmd>vsplit<CR>', {desc = 'Vertical split window'})
-map('n', '<C-W>-', '<cmd>split<CR>', {desc = 'Split window'})
+map('n', '<Leader>wr', enter_resize_mode, {desc = 'Window Resize Mode'})
+map('n', '<Leader>w=', '<C-w>=', {desc = 'Balance windows'})
+
+map('n', '<Leader>w_', '<cmd>vsplit<CR>', {desc = 'Vertical split'})
+map('n', '<Leader>w-', '<cmd>split<CR>', {desc = 'Horizontal split'})
