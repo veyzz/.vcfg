@@ -45,8 +45,6 @@ ln -sft ~/.config/nvim/lua/plugins/ \
 ln -sft ~/.config/nvim/lua/plugins/ \
   ~/.vcfg/.config/nvim/lua/plugins/nvim-lspconfig.lua
 ln -sft ~/.config/nvim/lua/plugins/ \
-  ~/.vcfg/.config/nvim/lua/plugins/gen.lua
-ln -sft ~/.config/nvim/lua/plugins/ \
   ~/.vcfg/.config/nvim/lua/plugins/nvim-cmp.lua
 
 # tmux

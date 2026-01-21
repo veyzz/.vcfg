@@ -33,10 +33,6 @@ require('lazy').setup({
                                          'saadparwaiz1/cmp_luasnip',
                                        },
   },
-  {'David-Kunz/gen.nvim'},
-  {'nvim-telescope/telescope.nvim', tag = '0.1.8',
-   dependencies = {'nvim-lua/plenary.nvim'}},
-  --{'nvim-telescope/telescope-ui-select.nvim'},
 })
 
 require('plugins.monokai')
@@ -46,5 +42,4 @@ require('plugins.vim-tmux-navigator')
 require('plugins.fzf')
 require('plugins.nerdtree')
 require('plugins.nvim-lspconfig')
-require('plugins.gen')
 require('plugins.nvim-cmp')
