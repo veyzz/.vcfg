@@ -3,6 +3,7 @@ gui:
   mouseEvents: false
   scrollHeight: 14
   filterMode: 'fuzzy'
+  showCommandLog: false
 
 git:
   useConfig: true
