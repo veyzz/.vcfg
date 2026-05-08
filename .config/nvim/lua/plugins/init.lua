@@ -12,18 +12,22 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  {'tanvirtin/monokai.nvim'},
-  {'nvim-lualine/lualine.nvim'},
+  { 'tanvirtin/monokai.nvim', priority = 1000,
+    config = function() require('plugins.monokai') end },
+  { 'nvim-lualine/lualine.nvim', dependencies = {'tanvirtin/monokai.nvim'},
+    config = function() require('plugins.lualine') end },
   {'jiangmiao/auto-pairs'},
-  {'easymotion/vim-easymotion'},
+  { 'easymotion/vim-easymotion', config = function() require('plugins.vim-easymotion') end },
   {'tpope/vim-abolish'},
   {'roxma/vim-tmux-clipboard'},
-  {'christoomey/vim-tmux-navigator'},
+  { 'christoomey/vim-tmux-navigator',
+    config = function() require('plugins.vim-tmux-navigator') end },
   {'tpope/vim-fugitive'},
-  {'junegunn/fzf.vim', dependencies = {'junegunn/fzf'}},
-  {'preservim/nerdtree'},
-  {'neovim/nvim-lspconfig'},
-  {'akinsho/git-conflict.nvim', version = "*", config = true},
+  { 'junegunn/fzf.vim', dependencies = {'junegunn/fzf'},
+    config = function() require('plugins.fzf') end },
+  { 'preservim/nerdtree', config = function() require('plugins.nerdtree') end },
+  { 'neovim/nvim-lspconfig', config = function() require('plugins.nvim-lspconfig') end },
+  {'akinsho/git-conflict.nvim', version = '*', config = true},
   {'lewis6991/gitsigns.nvim'},
   {'kdheepak/lazygit.nvim'},
   { 'hrsh7th/nvim-cmp', dependencies = { 'hrsh7th/cmp-nvim-lsp',
@@ -32,14 +36,5 @@ require('lazy').setup({
                                          'L3MON4D3/LuaSnip',
                                          'saadparwaiz1/cmp_luasnip',
                                        },
-  },
+    config = function() require('plugins.nvim-cmp') end },
 })
-
-require('plugins.monokai')
-require('plugins.lualine')
-require('plugins.vim-easymotion')
-require('plugins.vim-tmux-navigator')
-require('plugins.fzf')
-require('plugins.nerdtree')
-require('plugins.nvim-lspconfig')
-require('plugins.nvim-cmp')
