@@ -5,6 +5,11 @@ gui:
   filterMode: 'fuzzy'
   showCommandLog: false
 
+keybinding:
+  commits:
+    moveDownCommit: ["<alt+j>", "<alt+down>"]
+    moveUpCommit: ["<alt+k>", "<alt+up>"]
+
 git:
   useConfig: true
   overrideGpg: true
